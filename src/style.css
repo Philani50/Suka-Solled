@@ -121,4 +121,23 @@ form .btn { margin-top: 1.25rem; }
 @media (min-width: 48rem) { .grid3 { grid-template-columns: repeat(3, 1fr); } }
 .copy { margin-top: 1.5rem; font-size: .9rem; opacity: .85; }
 
+/* phones and tablets */
+html { overflow-wrap: break-word; }
+a, button, select, summary, .chip { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.menu-btn { min-height: 44px; min-width: 44px; }
+nav a { min-height: 44px; display: flex; align-items: center; }
+input:not([type='checkbox']), select, textarea { font-size: 1rem; -webkit-appearance: none; appearance: none; border-radius: 6px; }
+select { background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%232b1d10' stroke-width='2'/%3E%3C/svg%3E") no-repeat right .8rem center; padding-right: 2.2rem; }
+input[type='date'] { display: block; min-height: 44px; }
+.btn { -webkit-tap-highlight-color: transparent; }
+.site-header { padding-top: env(safe-area-inset-top); }
+.wrap { width: min(100% - 2rem - env(safe-area-inset-left) - env(safe-area-inset-right), 70rem); }
+.call-bar { display: none; }
+@media (max-width: 51.99rem) {
+  .call-bar { position: fixed; inset: auto 0 0 0; z-index: 10; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--brand); padding-bottom: env(safe-area-inset-bottom); box-shadow: 0 -2px 8px rgba(0, 0, 0, .25); }
+  .call-bar a { color: #fff; text-align: center; text-decoration: none; font-weight: 700; padding: .85rem .25rem; min-height: 48px; background: var(--accent); }
+  .call-bar a:nth-child(3) { background: #fff; color: var(--brand); }
+  #app { padding-bottom: calc(48px + env(safe-area-inset-bottom)); }
+}
+
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }

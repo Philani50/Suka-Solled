@@ -3,6 +3,7 @@ import { useHead } from '@unhead/vue'
 import SiteHeader from './components/SiteHeader.vue'
 import SiteFooter from './components/SiteFooter.vue'
 import site from './content/site.js'
+import { telHref, waHref } from './lib.js'
 
 // LocalBusiness structured data for Google (built from src/content/site.js)
 const ld = {
@@ -21,6 +22,7 @@ const ld = {
 
 useHead({
   htmlAttrs: { lang: 'en-ZA' },
+  meta: [{ name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' }],
   script: [{ type: 'application/ld+json', innerHTML: JSON.stringify(ld) }],
 })
 </script>
@@ -32,4 +34,10 @@ useHead({
     <RouterView />
   </main>
   <SiteFooter />
+  <!-- Phone-only quick actions (hidden on larger screens) -->
+  <div class="call-bar">
+    <a :href="telHref">Call</a>
+    <a :href="waHref()" target="_blank" rel="noopener">WhatsApp</a>
+    <RouterLink to="/quote">Get a quote</RouterLink>
+  </div>
 </template>
