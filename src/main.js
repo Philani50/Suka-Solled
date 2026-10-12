@@ -11,6 +11,7 @@ export const routes = [
   { path: '/quote', component: page('Quote') },
   { path: '/reviews', component: page('Reviews') },
   { path: '/contact', component: page('Contact') },
+  { path: '/thank-you', component: page('Thanks') },
   { path: '/privacy', component: page('Privacy') },
 ]
 

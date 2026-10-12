@@ -1,5 +1,6 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import site from '../content/site.js'
 import services from '../content/services.js'
 import { telHref, mailHref, waHref, usePageMeta } from '../lib.js'
@@ -13,7 +14,13 @@ const blank = () => ({
 const form = reactive(blank())
 const status = ref('idle') // idle | sending | success | error
 const minDate = ref('')
-onMounted(() => (minDate.value = new Date().toISOString().slice(0, 10)))
+const route = useRoute()
+const router = useRouter()
+onMounted(() => {
+  minDate.value = new Date().toISOString().slice(0, 10)
+  const wanted = route.query.service
+  if (typeof wanted === 'string' && services.some((s) => s.title === wanted)) form.service = wanted
+})
 
 async function submit() {
   if (status.value === 'sending') return
@@ -46,6 +53,7 @@ async function submit() {
     if (!res.ok || json.success === false) throw new Error('failed')
     Object.assign(form, blank())
     status.value = 'success'
+    router.push('/thank-you')
   } catch {
     status.value = 'error'
   }

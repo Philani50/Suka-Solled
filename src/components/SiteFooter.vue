@@ -15,6 +15,7 @@ import { telHref, mailHref, waHref } from '../lib.js'
         <p><a :href="telHref">{{ site.phoneDisplay }}</a></p>
         <p><a :href="mailHref">{{ site.email }}</a></p>
         <p><a :href="waHref()" target="_blank" rel="noopener">WhatsApp us</a></p>
+        <p v-if="site.facebookUrl"><a :href="site.facebookUrl" target="_blank" rel="noopener">Facebook</a></p>
       </div>
       <div>
         <p class="strong">Areas we serve</p>
