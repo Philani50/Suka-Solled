@@ -16,8 +16,8 @@ usePageMeta('Contact', `Call, WhatsApp or email ${site.name}. Serving ${site.are
       <dt>Email</dt><dd><a :href="mailHref">{{ site.email }}</a></dd>
       <dt>Hours</dt><dd>{{ site.hours }}</dd>
       <dt>Based in</dt><dd>{{ site.address }} (<a :href="mapsHref" target="_blank" rel="noopener">view on Google Maps</a>)</dd>
-      <dt>Areas delivered</dt><dd>{{ site.areas.join(', ') }}</dd>
+      <dt>Areas served</dt><dd>{{ site.areas.join(', ') }}</dd>
     </dl>
-    <p class="actions"><RouterLink to="/order" class="btn">Place an order online</RouterLink></p>
+    <p class="actions"><RouterLink to="/quote" class="btn">Request a quote online</RouterLink></p>
   </div>
 </template>

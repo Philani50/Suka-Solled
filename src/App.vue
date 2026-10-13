@@ -8,7 +8,7 @@ import { telHref, waHref } from './lib.js'
 // LocalBusiness structured data for Google (built from src/content/site.js)
 const ld = {
   '@context': 'https://schema.org',
-  '@type': ['LocalBusiness', 'FoodEstablishment'],
+  '@type': ['LocalBusiness', 'HomeAndConstructionBusiness'],
   name: site.name,
   description: site.tagline,
   url: site.siteUrl,
@@ -38,6 +38,6 @@ useHead({
   <div class="call-bar">
     <a :href="telHref">Call</a>
     <a :href="waHref()" target="_blank" rel="noopener">WhatsApp</a>
-    <RouterLink to="/order">Order now</RouterLink>
+    <RouterLink to="/quote">Get a quote</RouterLink>
   </div>
 </template>

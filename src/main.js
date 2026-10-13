@@ -6,9 +6,9 @@ const page = (name) => () => import(`./views/${name}.vue`)
 
 export const routes = [
   { path: '/', component: page('Home') },
-  { path: '/products', component: page('Products') },
+  { path: '/services', component: page('Services') },
   { path: '/gallery', component: page('Gallery') },
-  { path: '/order', component: page('Order') },
+  { path: '/quote', component: page('Quote') },
   { path: '/reviews', component: page('Reviews') },
   { path: '/contact', component: page('Contact') },
   { path: '/thank-you', component: page('Thanks') },
