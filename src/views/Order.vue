@@ -1,15 +1,15 @@
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import site from '../content/site.js'
-import services from '../content/services.js'
+import products, { totalFor, rand } from '../content/products.js'
 import { telHref, mailHref, waHref, usePageMeta } from '../lib.js'
 
-usePageMeta('Request a quote', `Request a free carpentry quote from ${site.name}. Tell us about your project and we will get back to you.`)
+usePageMeta('Place an order', `Order Peri-Peri Orange Hot Sauce from ${site.name}. Choose your pack and we will confirm delivery and payment.`)
 
 const blank = () => ({
-  name: '', phone: '', email: '', service: '', description: '',
-  measurements: '', date: '', area: '', consent: false, website: '', // "website" is the hidden honeypot
+  name: '', phone: '', email: '', product: '', quantity: 1, method: 'Delivery',
+  address: '', notes: '', date: '', consent: false, website: '', // "website" is the hidden honeypot
 })
 const form = reactive(blank())
 const status = ref('idle') // idle | sending | success | error
@@ -18,9 +18,13 @@ const route = useRoute()
 const router = useRouter()
 onMounted(() => {
   minDate.value = new Date().toISOString().slice(0, 10)
-  const wanted = route.query.service
-  if (typeof wanted === 'string' && services.some((s) => s.title === wanted)) form.service = wanted
+  const wanted = route.query.product
+  if (typeof wanted === 'string' && products.some((p) => p.title === wanted)) form.product = wanted
 })
+
+const selected = computed(() => products.find((p) => p.title === form.product))
+const total = computed(() => totalFor(selected.value, Number(form.quantity)))
+const quantityLabel = computed(() => (selected.value?.pack === 1 ? 'Number of bottles *' : 'Number of packs *'))
 
 async function submit() {
   if (status.value === 'sending') return
@@ -33,20 +37,21 @@ async function submit() {
   try {
     const data = new FormData()
     const fields = {
-      Name: form.name, Phone: form.phone, Email: form.email, Service: form.service,
-      Description: form.description, Measurements: form.measurements,
-      'Preferred date (request only)': form.date, 'Service area': form.area,
+      Name: form.name, Phone: form.phone, Email: form.email, Product: form.product,
+      Quantity: form.quantity, 'Estimated total': rand(total.value),
+      'Delivery or collection': form.method, 'Delivery address / area': form.address,
+      Notes: form.notes, 'Preferred date (request only)': form.date,
       'Consent given': 'Yes',
     }
     for (const [k, v] of Object.entries(fields)) data.append(k, v)
     if (form.email) data.append(site.form.provider === 'web3forms' ? 'replyto' : '_replyto', form.email)
     if (site.form.provider === 'web3forms') {
       data.append('access_key', site.form.accessKey)
-      data.append('subject', `New quote request from ${form.name}`)
+      data.append('subject', `New order from ${form.name}`)
       data.append('from_name', site.name)
       data.append('botcheck', '')
     } else {
-      data.append('_subject', `New quote request from ${form.name}`)
+      data.append('_subject', `New order from ${form.name}`)
     }
     const res = await fetch(site.form.endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } })
     const json = await res.json().catch(() => ({}))
@@ -63,11 +68,11 @@ async function submit() {
 <template>
   <div class="wrap section quote-grid">
     <div>
-      <h1>Request a quote</h1>
-      <p class="lead">Tell us about your project. We will contact you to discuss it and arrange a free measure-up.</p>
+      <h1>Place an order</h1>
+      <p class="lead">Choose your sauce and tell us where to bring it. We will contact you to confirm the total and payment.</p>
 
       <div v-if="status === 'success'" class="notice ok" role="status" tabindex="-1">
-        <strong>Thank you!</strong> Your request has been sent. We will contact you soon to confirm details and your preferred date.
+        <strong>Thank you!</strong> Your order has been sent. We will contact you soon to confirm the details and payment.
       </div>
 
       <form v-else @submit.prevent="submit">
@@ -82,27 +87,32 @@ async function submit() {
         <label for="email">Email *</label>
         <input id="email" v-model="form.email" type="email" autocomplete="email" required />
 
-        <label for="service">Service type *</label>
-        <select id="service" v-model="form.service" required>
-          <option value="" disabled>Choose a service</option>
-          <option v-for="s in services" :key="s.slug">{{ s.title }}</option>
-          <option>Something else</option>
+        <label for="product">Product *</label>
+        <select id="product" v-model="form.product" required>
+          <option value="" disabled>Choose a product</option>
+          <option v-for="p in products" :key="p.slug">{{ p.title }}</option>
         </select>
 
-        <label for="description">Project description *</label>
-        <textarea id="description" v-model="form.description" rows="5" required></textarea>
+        <label for="quantity">{{ quantityLabel }}</label>
+        <input id="quantity" v-model.number="form.quantity" type="number" min="1" max="500" step="1" inputmode="numeric" required />
+        <p v-if="total" class="hint" role="status">Estimated total: <strong>{{ rand(total) }}</strong> (we confirm the final total, including any delivery cost).</p>
 
-        <label for="measurements">Rough measurements</label>
-        <input id="measurements" v-model="form.measurements" type="text" aria-describedby="m-hint" />
-        <p id="m-hint" class="hint">For example: wall 3.2 m wide x 2.4 m high. Rough is fine; we will measure properly on site.</p>
+        <label for="method">Delivery or collection *</label>
+        <select id="method" v-model="form.method" required>
+          <option>Delivery</option>
+          <option>Collection</option>
+        </select>
+
+        <label for="address">{{ form.method === 'Delivery' ? 'Delivery address *' : 'Your area *' }}</label>
+        <input id="address" v-model="form.address" type="text" list="areas" autocomplete="street-address" required />
+        <datalist id="areas"><option v-for="a in site.areas" :key="a" :value="a" /></datalist>
 
         <label for="date">Preferred date</label>
         <input id="date" v-model="form.date" type="date" :min="minDate" aria-describedby="d-hint" />
-        <p id="d-hint" class="hint">This is a request only. We will confirm the actual date with you manually.</p>
+        <p id="d-hint" class="hint">This is a request only. We will confirm the actual date with you.</p>
 
-        <label for="area">Service area *</label>
-        <input id="area" v-model="form.area" type="text" list="areas" required />
-        <datalist id="areas"><option v-for="a in site.areas" :key="a" :value="a" /></datalist>
+        <label for="notes">Notes</label>
+        <textarea id="notes" v-model="form.notes" rows="3"></textarea>
 
         <!-- Honeypot: hidden from people, bots fill it in -->
         <div class="hp" aria-hidden="true">
@@ -113,28 +123,26 @@ async function submit() {
         <p class="check">
           <input id="consent" v-model="form.consent" type="checkbox" required />
           <label for="consent">
-            I agree that {{ site.name }} may use my details to respond to this request, as described in the
+            I agree that {{ site.name }} may use my details to respond to this order, as described in the
             <RouterLink to="/privacy" target="_blank">privacy notice</RouterLink>. *
           </label>
         </p>
 
-        <p class="hint">No photo uploads here. Please send photos of the space by WhatsApp or email after submitting.</p>
-
         <div v-if="status === 'error'" class="notice bad" role="alert">
-          Sorry, your request could not be sent. Please try again, or contact us directly on
+          Sorry, your order could not be sent. Please try again, or contact us directly on
           <a :href="telHref">{{ site.phoneDisplay }}</a>, WhatsApp or <a :href="mailHref">{{ site.email }}</a>.
         </div>
 
         <button class="btn" type="submit" :disabled="status === 'sending'">
-          {{ status === 'sending' ? 'Sending...' : 'Send request' }}
+          {{ status === 'sending' ? 'Sending...' : 'Send order' }}
         </button>
       </form>
     </div>
 
-    <aside class="card side" aria-label="Other ways to reach us">
+    <aside class="card side" aria-label="Other ways to order">
       <h2>Prefer to talk?</h2>
       <p>Call <a :href="telHref" class="strong">{{ site.phoneDisplay }}</a></p>
-      <p><a :href="waHref()" class="btn alt" target="_blank" rel="noopener">WhatsApp us</a></p>
+      <p><a :href="waHref()" class="btn alt" target="_blank" rel="noopener">Order on WhatsApp</a></p>
       <p>Or email <a :href="mailHref">{{ site.email }}</a></p>
       <p class="hint">{{ site.hours }}</p>
     </aside>
