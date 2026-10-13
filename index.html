@@ -19,10 +19,38 @@
 
     <!-- Search engine indexing -->
     <meta name="robots" content="index, follow" />
+
+    <!-- Canonical + social previews -->
+    <link rel="canonical" href="https://suka-solled.woodworks.workers.dev/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Suka Solled" />
+    <meta property="og:title" content="Suka Solled | Peri-Peri Orange Hot Sauce" />
+    <meta property="og:description" content="Hot and zesty peri-peri orange hot sauce in 250ml bottles and bulk packs. Order online." />
+    <meta property="og:url" content="https://suka-solled.woodworks.workers.dev/" />
+    <meta property="og:image" content="https://suka-solled.woodworks.workers.dev/images/206866.jpg" />
+    <meta property="og:locale" content="en_ZA" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Structured data so Google can show the business -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Suka Solled",
+        "url": "https://suka-solled.woodworks.workers.dev/",
+        "logo": "https://suka-solled.woodworks.workers.dev/favicon.svg",
+        "description": "Peri-Peri Orange Hot Sauce made in Pretoria East.",
+        "telephone": "+27698032911",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Pretoria East",
+          "addressCountry": "ZA"
+        }
+      }
+    </script>
   </head>
   <body>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
-```

@@ -17,7 +17,7 @@ export default {
   region: 'Gouteng',
   country: 'ZA',
 
-  siteUrl: 'https://www.Suka-solled.co.za', // final web address (no trailing slash)
+  siteUrl: 'https://suka-solled.woodworks.workers.dev', // final web address (no trailing slash)
   googleReviewsUrl: 'https://g.page/r/YOUR_GOOGLE_REVIEW_LINK', // replace with your Google review link
   facebookUrl: '',
 
