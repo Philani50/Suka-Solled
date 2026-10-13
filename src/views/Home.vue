@@ -1,13 +1,13 @@
 <script setup>
 import site from '../content/site.js'
-import services from '../content/services.js'
+import products from '../content/products.js'
 import reviews from '../content/reviews.js'
 import process from '../content/process.js'
 import { asset, waHref, usePageMeta } from '../lib.js'
 
 usePageMeta(
   '',
-  `${site.name}: custom wardrobes, kitchen cupboards, sink units, shelves, doors and repairs in ${site.areas.slice(0, 3).join(', ')}. Request a free quote.`,
+  `${site.name} Peri-Peri Orange Hot Sauce: hot and zesty 250ml bottles, with bulk packs for tuckshops, restaurants and street food in ${site.areas.slice(0, 3).join(', ')}. Order online.`,
 )
 </script>
 
@@ -15,40 +15,40 @@ usePageMeta(
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <p class="eyebrow">{{ site.region }} carpentry</p>
+        <p class="eyebrow">{{ site.region }} hot sauce</p>
         <h1>{{ site.tagline }}</h1>
         <p class="lead">
-          Handmade carpentry for homes and businesses in {{ site.areas.join(', ') }}. Honest quotes, tidy work, built to fit.
+          Handcrafted peri-peri orange sauce in a 250ml bottle. R34.49 a bottle, or just R28 when you buy 10 or more. Perfect for braai, chips, wraps and street food.
         </p>
         <p class="actions">
-          <RouterLink to="/quote" class="btn">Request a quote</RouterLink>
+          <RouterLink to="/order" class="btn">Order now</RouterLink>
           <a :href="waHref()" class="btn alt" target="_blank" rel="noopener">WhatsApp us</a>
         </p>
       </div>
-      <img :src="asset('images/hero.jpg')" width="1200" height="700" alt="A well-equipped carpentry workshop with timber stacked above a workbench and hand tools on the wall" fetchpriority="high" />
+      <img :src="asset('images/206870.jpg')" width="1200" height="800" alt="Two friends laughing at a braai while one pours Suka Solled sauce over fried chicken and chips" fetchpriority="high" />
     </div>
   </section>
 
   <section class="trust" aria-label="Why choose us">
     <ul class="wrap trust-list">
-      <li>Free measure-up</li>
-      <li>Written quotes</li>
-      <li>Made to fit</li>
-      <li>Tidy installation</li>
+      <li>Hot and zesty</li>
+      <li>Made in the township</li>
+      <li>Bulk savings</li>
+      <li>Delivery or collection</li>
     </ul>
   </section>
 
   <section class="wrap section">
-    <h2 class="rule">What we make and fix</h2>
+    <h2 class="rule">Choose your pack</h2>
     <ul class="cards">
-      <li v-for="s in services" :key="s.slug" class="card lift">
-        <img :src="asset('images/' + s.image)" width="800" height="600" :alt="s.alt" loading="lazy" />
-        <h3>{{ s.title }}</h3>
-        <p>{{ s.text }}</p>
-        <p><RouterLink :to="{ path: '/quote', query: { service: s.title } }">Get a quote for {{ s.title.toLowerCase() }}</RouterLink></p>
+      <li v-for="p in products" :key="p.slug" class="card lift">
+        <img :src="asset('images/' + p.image)" width="800" height="600" :alt="p.alt" loading="lazy" />
+        <h3>{{ p.title }}</h3>
+        <p>{{ p.text }}</p>
+        <p><RouterLink :to="{ path: '/order', query: { product: p.title } }">Order {{ p.title.toLowerCase() }}</RouterLink></p>
       </li>
     </ul>
-    <p><RouterLink to="/services">See all services</RouterLink></p>
+    <p><RouterLink to="/products">See all products and prices</RouterLink></p>
   </section>
 
   <section class="band">
@@ -61,7 +61,7 @@ usePageMeta(
           <p>{{ p.text }}</p>
         </li>
       </ol>
-      <p class="actions"><RouterLink to="/quote" class="btn small">Start with a quote</RouterLink></p>
+      <p class="actions"><RouterLink to="/order" class="btn small">Start your order</RouterLink></p>
     </div>
   </section>
 

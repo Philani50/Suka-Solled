@@ -1,6 +1,6 @@
-# Carpentry website (Vue 3 + Vite, static)
+# Suka Solled website (Vue 3 + Vite, static)
 
-A static site for a small carpentry business: Home, Services, Gallery, Request a Quote, Reviews, Contact, Privacy Notice. No backend. Every page is pre-rendered to plain HTML at build time (via `vite-ssg`), so it is fast, SEO-friendly and runs on GitHub Pages, Cloudflare Pages or Netlify.
+A static site advertising Suka Solled Peri-Peri Orange Hot Sauce: Home, Products, Gallery, Place an Order, Reviews, Contact, Privacy Notice. No backend. Every page is pre-rendered to plain HTML at build time (via `vite-ssg`), so it is fast, SEO-friendly and runs on GitHub Pages, Cloudflare Pages or Netlify.
 
 ## Run it locally
 
@@ -17,25 +17,26 @@ npm run build     # static site into dist/
 | What | File |
 | --- | --- |
 | Business name, phone, email, hours, areas, Google review link, form settings, privacy retention | `src/content/site.js` |
-| Services list | `src/content/services.js` |
+| Products, pack sizes and prices | `src/content/products.js` |
+| Order steps and FAQ | `src/content/process.js`, `src/content/faq.js` |
 | Gallery photos, categories and alt text | `src/content/gallery.js` |
 | Testimonials | `src/content/reviews.js` |
 | Colours and fonts | top of `src/style.css` (`:root` variables) |
 | Page wording | `src/views/*.vue` (the text between the `<template>` tags) |
 
-Everything in these files is **placeholder** (name, phone, reviews, photos). Replace it all before going live. The testimonials must be real ones you have permission to use.
+Check the remaining placeholders (reviews, Google review link, site URL, hours) before going live. Testimonials must be real ones you have permission to use.
 
-Also update the domain (`https://www.yourcarpentry.co.za`) in `public/robots.txt` and `public/sitemap.xml`, and `siteUrl` in `site.js`.
+Also update the domain (`https://www.sukasolled.co.za`) in `public/robots.txt` and `public/sitemap.xml`, and `siteUrl` in `site.js`.
 
 ## Swapping photos
 
 1. Put your photos in `public/images/`. Resize to about 1200 px wide and save as `.webp` or `.jpg` (under ~200 KB each, e.g. with squoosh.app).
-2. Edit the file name and `alt` text in `src/content/gallery.js` (and `services.js` for service pictures; the hero is `public/images/hero.svg`, referenced in `src/views/Home.vue`).
-3. Alt text should describe the photo, e.g. "Built-in oak wardrobe with sliding doors in a bedroom".
+2. Edit the file name and `alt` text in `src/content/gallery.js` (and `products.js` for product pictures; the home page hero image is set in `src/views/Home.vue`).
+3. Alt text should describe the photo, e.g. "Suka Solled bottle next to a braai meat wrap".
 
-## Quote form setup (free form service)
+## Order form setup (free form service)
 
-The form emails each request to the owner. Pick one service:
+The form emails each order to the owner. The estimated total comes from `products.js`; payment is arranged by phone or WhatsApp, not on the site. Pick one service:
 
 **Formspree** (formspree.io): create a form, copy its URL (`https://formspree.io/f/xxxxxxxx`). In `site.js`:
 ```js
@@ -57,7 +58,7 @@ Spam protection: a hidden honeypot field. If the form service is unconfigured or
 2. In the repo: **Settings > Pages > Source: GitHub Actions**.
 3. Each push to `main` runs `.github/workflows/deploy.yml`, which builds and publishes the site at `https://USER.github.io/REPO/`.
 
-**Custom domain** (e.g. `yourcarpentry.co.za`): in Settings > Pages add the domain and set the DNS records GitHub shows. Then delete the `BASE_PATH` line in `.github/workflows/deploy.yml` so the site builds for the domain root. For Cloudflare Pages / Netlify: build command `npm run build`, output folder `dist`, no `BASE_PATH`.
+**Custom domain** (e.g. `sukasolled.co.za`): in Settings > Pages add the domain and set the DNS records GitHub shows. Then delete the `BASE_PATH` line in `.github/workflows/deploy.yml` so the site builds for the domain root. For Cloudflare Pages / Netlify: build command `npm run build`, output folder `dist`, no `BASE_PATH`.
 
 ## Before going live checklist
 

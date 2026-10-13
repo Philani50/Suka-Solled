@@ -1,12 +1,13 @@
 {
-  "name": "carpentry-site",
+  "name": "suka-solled-site",
   "private": true,
   "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite-ssg build",
-    "preview": "vite preview"
+    "preview": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
     "@unhead/vue": "^2.1.17",
@@ -15,7 +16,9 @@
     "vue-router": "^5.4.0"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.63.1",
     "@vitejs/plugin-vue": "^6.0.10",
-    "vite": "^8.3.4"
+    "vite": "^8.3.4",
+    "wrangler": "^4.149.0"
   }
 }

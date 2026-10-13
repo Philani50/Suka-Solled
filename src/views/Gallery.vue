@@ -4,7 +4,7 @@ import site from '../content/site.js'
 import { categories, photos } from '../content/gallery.js'
 import { asset, usePageMeta } from '../lib.js'
 
-usePageMeta('Gallery', `Photos of recent wardrobes, kitchens, sink units, shelves and doors built by ${site.name}.`)
+usePageMeta('Gallery', `Posters and photos of ${site.name} Peri-Peri Orange Hot Sauce with braai, chips and wraps.`)
 
 const active = ref('All')
 const shown = computed(() => (active.value === 'All' ? photos : photos.filter((p) => p.category === active.value)))
@@ -44,12 +44,12 @@ function touchEnd(e) {
     <ul class="cards photos">
       <li v-for="(p, i) in shown" :key="p.src">
         <button class="photo-btn" :aria-label="`View larger: ${p.alt}`" @click="openAt(i)">
-          <img :src="asset('images/' + p.src)" width="800" height="600" :alt="p.alt" loading="lazy" />
+          <img :src="asset('images/' + p.src)" width="800" height="800" :alt="p.alt" loading="lazy" />
         </button>
         <p class="cap">{{ p.category }}</p>
       </li>
     </ul>
-    <p class="actions"><RouterLink to="/quote" class="btn">Like what you see? Get a quote</RouterLink></p>
+    <p class="actions"><RouterLink to="/order" class="btn">Hungry? Order now</RouterLink></p>
 
     <dialog ref="dlg" class="lightbox" aria-label="Photo viewer" @keydown="onKey" @click="onBackdrop">
       <div v-if="current" class="lb-inner" @touchstart.passive="touchStart" @touchend.passive="touchEnd">

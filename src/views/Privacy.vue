@@ -22,15 +22,15 @@ usePageMeta('Privacy notice', `How ${site.name} collects, uses and protects your
 
     <h2>What we collect</h2>
     <p>
-      When you use the quote form we collect: your name, phone number, email address, the type of
-      service, your project description, rough measurements, preferred date and service area. If you
+      When you use the order form we collect: your name, phone number, email address, the type of
+      product, quantity, delivery or collection choice, address, notes and preferred date. If you
       contact us by phone, WhatsApp or email we receive the details you send us. This website does not
       use advertising cookies or tracking.
     </p>
 
     <h2>Why we collect it</h2>
     <p>
-      Only to reply to your request, prepare a quote, arrange a visit or job, and keep records of work
+      Only to reply to your request, confirm your order, arrange payment and delivery, and keep records of orders
       done. We do not sell your information or use it for unrelated marketing.
     </p>
 
@@ -44,8 +44,8 @@ usePageMeta('Privacy notice', `How ${site.name} collects, uses and protects your
 
     <h2>How long we keep it</h2>
     <p>
-      We keep enquiries and quotes for up to {{ site.privacy.retention }}, then delete them, unless the law
-      requires us to keep job and invoice records longer.
+      We keep enquiries and orders for up to {{ site.privacy.retention }}, then delete them, unless the law
+      requires us to keep order and invoice records longer.
     </p>
 
     <h2>Your rights</h2>

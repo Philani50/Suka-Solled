@@ -11,7 +11,7 @@ export const waHref = (message = site.whatsappMessage) =>
 
 // Sets <title> and meta description for a page (also baked into the built HTML)
 export function usePageMeta(title, description) {
-  const full = title ? `${title} | ${site.name}` : `${site.name} | Custom carpentry in ${site.areas[0]}`
+  const full = title ? `${title} | ${site.name}` : `${site.name} | Peri-peri orange sauce in ${site.areas[0]}`
   useHead({
     title: full,
     meta: [

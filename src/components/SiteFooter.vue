@@ -18,7 +18,7 @@ import { telHref, mailHref, waHref } from '../lib.js'
         <p v-if="site.facebookUrl"><a :href="site.facebookUrl" target="_blank" rel="noopener">Facebook</a></p>
       </div>
       <div>
-        <p class="strong">Areas we serve</p>
+        <p class="strong">Areas we deliver to</p>
         <p>{{ site.areas.join(', ') }}</p>
         <p><RouterLink to="/privacy">Privacy notice</RouterLink></p>
       </div>
