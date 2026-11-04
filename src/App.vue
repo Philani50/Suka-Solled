@@ -8,16 +8,19 @@ import { telHref, waHref } from './lib.js'
 // LocalBusiness structured data for Google (built from src/content/site.js)
 const ld = {
   '@context': 'https://schema.org',
+  '@id': `${site.siteUrl}/#organization`,
   '@type': ['LocalBusiness', 'FoodEstablishment'],
   name: site.name,
   description: site.tagline,
   url: site.siteUrl,
+  logo: `${site.siteUrl}/favicon.svg`,
+  image: `${site.siteUrl}/images/1000301139.jpg`,
   telephone: `+${site.phoneInternational}`,
   email: site.email,
   openingHours: site.hours,
   address: { '@type': 'PostalAddress', addressLocality: site.address, addressRegion: site.region, addressCountry: site.country },
   areaServed: site.areas.map((name) => ({ '@type': 'Place', name })),
-  sameAs: [site.googleReviewsUrl, site.facebookUrl].filter(Boolean),
+  sameAs: [site.googleReviewsUrl, site.facebookUrl].filter((url) => url && !url.includes('YOUR_')),
 }
 
 useHead({

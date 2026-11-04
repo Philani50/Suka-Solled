@@ -26,7 +26,7 @@ npm run build     # static site into dist/
 
 Check the remaining placeholders (reviews, Google review link, site URL, hours) before going live. Testimonials must be real ones you have permission to use.
 
-Also update the domain (`https://www.sukasolled.co.za`) in `public/robots.txt` and `public/sitemap.xml`, and `siteUrl` in `site.js`.
+For the GitHub Pages project site, the canonical URL is `https://philani50.github.io/Suka-Solled/`. If you use a custom domain later, update `siteUrl` in `src/content/site.js`, the canonical/social URLs in `index.html`, and the URLs in `public/robots.txt` and `public/sitemap.xml`.
 
 ## Swapping photos
 
@@ -55,7 +55,7 @@ Spam protection: a hidden honeypot field. If the form service is unconfigured or
 ## Deploy to GitHub Pages
 
 1. Create a GitHub repo and push this project to the `main` branch.
-2. In the repo: **Settings > Pages > Source: GitHub Actions**.
+2. In the repo: **Settings > Pages > Build and deployment > Source: GitHub Actions**. Pages must be enabled before the deploy job can publish.
 3. Each push to `main` runs `.github/workflows/deploy.yml`, which builds and publishes the site at `https://USER.github.io/REPO/`.
 
 **Custom domain** (e.g. `sukasolled.co.za`): in Settings > Pages add the domain and set the DNS records GitHub shows. Then delete the `BASE_PATH` line in `.github/workflows/deploy.yml` so the site builds for the domain root. For Cloudflare Pages / Netlify: build command `npm run build`, output folder `dist`, no `BASE_PATH`.
