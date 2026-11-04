@@ -3,7 +3,7 @@ import { ref, reactive, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import site from '../content/site.js'
 import products, { totalFor, rand } from '../content/products.js'
-import { telHref, mailHref, waHref, usePageMeta } from '../lib.js'
+import { asset, telHref, mailHref, waHref, usePageMeta } from '../lib.js'
 
 usePageMeta('Place an order', `Order Peri-Peri Orange Hot Sauce from ${site.name}. Choose your pack and we will confirm delivery and payment.`)
 
@@ -139,8 +139,15 @@ async function submit() {
       </form>
     </div>
 
-    <aside class="card side" aria-label="Other ways to order">
-      <h2>Prefer to talk?</h2>
+    <aside class="card side order-side" aria-label="Order help and selected product">
+      <template v-if="selected">
+        <img class="order-product-image" :src="asset('images/' + selected.image)" :alt="selected.alt" />
+        <p class="eyebrow">Your pick</p>
+        <h2>{{ selected.title }}</h2>
+        <p class="order-total" v-if="total">{{ rand(total) }} <span>estimated total</span></p>
+        <p class="hint">We’ll confirm delivery and your final total before payment.</p>
+      </template>
+      <h2>Need a hand?</h2>
       <p>Call <a :href="telHref" class="strong">{{ site.phoneDisplay }}</a></p>
       <p><a :href="waHref()" class="btn alt" target="_blank" rel="noopener">Order on WhatsApp</a></p>
       <p>Or email <a :href="mailHref">{{ site.email }}</a></p>

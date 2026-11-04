@@ -3,8 +3,8 @@
 //  Everything here is PLACEHOLDER text - replace it with real info.
 // ============================================================
 export default {
-  name: 'Suka Solled',
-  tagline: 'Township premium peri-peri orange sauce. Flame. Zest. Flavour.',
+  name: 'Suka Bhabhalazi',
+  tagline: 'Premium peri-peri orange sauce. Flame. Zest. Flavour.',
   owner: 'Alwande Sithole',
   phoneDisplay: '069 803 2911',
   phoneInternational: '27698032911', // no "+", no spaces, no leading 0 (used for tel: and WhatsApp)
@@ -21,7 +21,7 @@ export default {
   googleReviewsUrl: 'https://g.page/r/YOUR_GOOGLE_REVIEW_LINK', // replace with your Google review link
   facebookUrl: '',
 
-  whatsappMessage: 'Hi! I would like to order Suka Solled Peri-Peri Orange Sauce.',
+  whatsappMessage: 'Hi! I would like to order Suka Bhabhalazi Peri-Peri Orange Sauce.',
 
   // Form service. See README. No secrets here: both keys are public by design.
   form: {

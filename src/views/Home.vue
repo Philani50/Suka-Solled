@@ -1,13 +1,13 @@
 <script setup>
 import site from '../content/site.js'
-import products from '../content/products.js'
+import products, { rand, retailPrice } from '../content/products.js'
 import reviews from '../content/reviews.js'
 import process from '../content/process.js'
 import { asset, waHref, usePageMeta } from '../lib.js'
 
 usePageMeta(
   '',
-  `${site.name} Peri-Peri Orange Hot Sauce: hot and zesty 250ml bottles, with bulk packs for tuckshops, restaurants and street food in ${site.areas.slice(0, 3).join(', ')}. Order online.`,
+  `${site.name} Peri-Peri Orange Hot Sauce: hot and zesty 125ml bottles, with bulk packs for tuckshops, restaurants and street food in ${site.areas.slice(0, 3).join(', ')}. Order online.`,
 )
 </script>
 
@@ -15,45 +15,54 @@ usePageMeta(
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <p class="eyebrow">{{ site.region }} hot sauce</p>
-        <h1>{{ site.tagline }}</h1>
-        <p class="lead">
-          Handcrafted peri-peri orange sauce in a 250ml bottle. R34.49 a bottle, or just R28 when you buy 10 or more. Perfect for braai, chips, wraps and street food.
-        </p>
+        <p class="eyebrow">{{ site.region }} <span aria-hidden="true">/</span> peri-peri orange</p>
+        <h1>Bring the <span>heat.</span> Keep the flavour.</h1>
+        <p class="lead">Meet {{ site.name }}: hot, zesty peri-peri orange sauce made for braais, chips, wraps and everything that needs a little more fire.</p>
+        <p class="hero-price"><strong>{{ rand(retailPrice) }}</strong> <span>per 125ml bottle</span></p>
+        <p class="hero-saving">Bulk packs available from 6 to 48 bottles.</p>
         <p class="actions">
-          <RouterLink to="/order" class="btn">Order now</RouterLink>
-          <a :href="waHref()" class="btn alt" target="_blank" rel="noopener">WhatsApp us</a>
+          <RouterLink to="/products" class="btn">Shop the sauce <span aria-hidden="true">→</span></RouterLink>
+          <a :href="waHref()" class="btn alt" target="_blank" rel="noopener">Chat on WhatsApp</a>
         </p>
       </div>
-      <img :src="asset('images/206870.jpg')" width="1200" height="800" alt="Two friends laughing at a braai while one pours Suka Solled sauce over fried chicken and chips" fetchpriority="high" />
+      <div class="hero-photo">
+        <img :src="asset('images/1000301139.jpg')" width="1600" height="1067" alt="Suka Bhabhalazi peri-peri sauce poured over a braai platter of grilled meat and vegetables" fetchpriority="high" />
+        <p class="photo-stamp"><span>GOOD FOOD</span><span>GETS FIERY</span></p>
+      </div>
     </div>
   </section>
 
-  <section class="trust" aria-label="Why choose us">
+  <section class="trust" aria-label="Why choose Suka Bhabhalazi">
     <ul class="wrap trust-list">
-      <li>Hot and zesty</li>
-      <li>Made in the township</li>
-      <li>Bulk savings</li>
-      <li>Delivery or collection</li>
+      <li><span aria-hidden="true">✳</span> Hot &amp; zesty</li>
+      <li><span aria-hidden="true">✳</span> Orange with attitude</li>
+      <li><span aria-hidden="true">✳</span> Better bulk prices</li>
+      <li><span aria-hidden="true">✳</span> Delivery or collection</li>
     </ul>
   </section>
 
   <section class="wrap section">
-    <h2 class="rule">Choose your pack</h2>
-    <ul class="cards">
-      <li v-for="p in products" :key="p.slug" class="card lift">
+    <div class="section-heading">
+      <div><p class="eyebrow">Pick your heat</p><h2 class="rule">Find your flavour</h2></div>
+      <RouterLink to="/products" class="text-link">View all prices <span aria-hidden="true">→</span></RouterLink>
+    </div>
+    <ul class="cards product-cards">
+      <li v-for="p in products" :key="p.slug" class="card product-card lift">
         <img :src="asset('images/' + p.image)" width="800" height="600" :alt="p.alt" loading="lazy" />
-        <h3>{{ p.title }}</h3>
-        <p>{{ p.text }}</p>
-        <p><RouterLink :to="{ path: '/order', query: { product: p.title } }">Order {{ p.title.toLowerCase() }}</RouterLink></p>
+        <div class="product-card-copy">
+          <p class="product-price">{{ rand(p.price ?? retailPrice) }} <span>{{ p.price === null ? '/ bottle' : `/ ${p.pack} bottles` }}</span></p>
+          <h3>{{ p.title }}</h3>
+          <p>{{ p.text }}</p>
+          <RouterLink :to="{ path: '/order', query: { product: p.title } }" class="text-link">Choose this pack <span aria-hidden="true">→</span></RouterLink>
+        </div>
       </li>
     </ul>
-    <p><RouterLink to="/products">See all products and prices</RouterLink></p>
   </section>
 
   <section class="band">
     <div class="wrap">
-      <h2 class="rule light">How it works</h2>
+      <p class="eyebrow">Easy as that</p>
+      <h2 class="rule light">A little heat is just a few steps away</h2>
       <ol class="steps">
         <li v-for="(p, i) in process" :key="p.title">
           <span class="step-no" aria-hidden="true">{{ i + 1 }}</span>
@@ -61,7 +70,7 @@ usePageMeta(
           <p>{{ p.text }}</p>
         </li>
       </ol>
-      <p class="actions"><RouterLink to="/order" class="btn small">Start your order</RouterLink></p>
+      <p class="actions"><RouterLink to="/order" class="btn">Start your order <span aria-hidden="true">→</span></RouterLink></p>
     </div>
   </section>
 
