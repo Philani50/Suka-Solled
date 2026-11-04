@@ -1,6 +1,6 @@
-# Suka Solled website (Vue 3 + Vite, static)
+# Suka Bhabhalazi website (Vue 3 + Vite, static)
 
-A static site advertising Suka Solled Peri-Peri Orange Hot Sauce: Home, Products, Gallery, Place an Order, Reviews, Contact, Privacy Notice. No backend. Every page is pre-rendered to plain HTML at build time (via `vite-ssg`), so it is fast, SEO-friendly and runs on GitHub Pages, Cloudflare Pages or Netlify.
+A static site advertising Suka Bhabhalazi Peri-Peri Orange Hot Sauce: Home, Products, Gallery, Place an Order, Reviews, Contact, Privacy Notice. No backend. Every page is pre-rendered to plain HTML at build time (via `vite-ssg`), so it is fast, SEO-friendly and runs on GitHub Pages, Cloudflare Pages or Netlify.
 
 ## Run it locally
 
@@ -32,7 +32,7 @@ Also update the domain (`https://www.sukasolled.co.za`) in `public/robots.txt` a
 
 1. Put your photos in `public/images/`. Resize to about 1200 px wide and save as `.webp` or `.jpg` (under ~200 KB each, e.g. with squoosh.app).
 2. Edit the file name and `alt` text in `src/content/gallery.js` (and `products.js` for product pictures; the home page hero image is set in `src/views/Home.vue`).
-3. Alt text should describe the photo, e.g. "Suka Solled bottle next to a braai meat wrap".
+3. Alt text should describe the photo, e.g. "Suka Bhabhalazi bottle next to a braai meat wrap".
 
 ## Order form setup (free form service)
 
