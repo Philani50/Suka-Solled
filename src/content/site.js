@@ -17,7 +17,7 @@ export default {
   region: 'Gouteng',
   country: 'ZA',
 
-  siteUrl: 'https://suka-solled.woodworks.workers.dev', // final web address (no trailing slash)
+  siteUrl: 'https://philani50.github.io/Suka-Solled', // GitHub Pages project-site URL (no trailing slash)
   googleReviewsUrl: 'https://g.page/r/YOUR_GOOGLE_REVIEW_LINK', // replace with your Google review link
   facebookUrl: '',
 
