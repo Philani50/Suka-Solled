@@ -23,12 +23,12 @@ useHead({
 </script>
 
 <template>
-  <div class="wrap section">
+  <div class="wrap section products-page">
     <header class="shop-heading">
-      <p class="eyebrow">The good stuff</p>
-      <h1>Choose your heat.</h1>
+      <p class="eyebrow"><span class="eyebrow-signal" aria-hidden="true"></span>The good stuff, turned up</p>
+      <h1>Choose your heat<span class="heading-accent">.</span></h1>
       <p class="lead">One bottle or a pack for the whole crew. Delivery across {{ site.areas.join(', ') }}.</p>
-      <p class="shop-deal"><strong>Bulk deals:</strong> packs from 6 to 48 bottles.</p>
+      <p class="shop-deal"><span class="deal-signal" aria-hidden="true"></span><strong>Bulk deals</strong> packs from 6 to 48 bottles.</p>
     </header>
     <ul class="cards product-cards shop-cards">
       <li v-for="s in products" :id="s.slug" :key="s.slug" class="card product-card lift">
